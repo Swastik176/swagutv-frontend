@@ -10,7 +10,7 @@ export function useSocket() {
         const token = getToken();
         if (!token) return;
 
-        const socket = io("http://localhost:3001", {
+        const socket = io(import.meta.env.VITE_SIGNALING_URL, {
         autoConnect: false,
         });
 
