@@ -22,6 +22,9 @@ export default function App() {
           }
         />
         <Route path="*" element={<Navigate to="/chat" />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/verify-otp" element={<VerifyOtp />} />
+
       </Routes>
     </BrowserRouter>
   );
