@@ -13,12 +13,12 @@ export default function Login() {
         e.preventDefault();
         setLoading(true);
         try {
-        await login(email, password);
-        navigate("/chat");
-        } catch {
-        alert("Invalid credentials");
+            await login(email, password);
+            navigate("/chat");
+        } catch (error) {
+            alert("Invalid credentials");
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     }
 

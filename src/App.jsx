@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/Login";
 import Chat from "./pages/Chat";
+import Signup from "./pages/Signup";
+import VerifyOtp from "./pages/VerifyOtp";
 
 function RequireAuth({ children }){
   const token = localStorage.getItem("jwt");
@@ -12,6 +14,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/chat"
@@ -22,9 +26,6 @@ export default function App() {
           }
         />
         <Route path="*" element={<Navigate to="/chat" />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/verify-otp" element={<VerifyOtp />} />
-
       </Routes>
     </BrowserRouter>
   );

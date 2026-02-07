@@ -100,7 +100,7 @@ export default function Chat() {
             </div>
 
             {/* CONTROLS */}
-            <div className="flex gap-3">
+            <div className="flex">
                 {!inQueue ? (
                 <button
                     onClick={start}

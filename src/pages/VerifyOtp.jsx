@@ -16,11 +16,14 @@ export default function VerifyOtp() {
 
         try {
         await axios.post(
-            `${import.meta.env.VITE_API_BASE_URL}/auth/verify-otp`,
-            { email, otp }
-        );
-        navigate("/login");
-        } catch {
+            `${import.meta.env.VITE_API_BASE_URL}/auth/verify-otp`, null,{
+                params: {
+                    email: email,
+                    otp: otp
+                }
+            });
+            navigate("/login");
+        } catch (err) {
         alert("Invalid OTP");
         } finally {
         setLoading(false);
