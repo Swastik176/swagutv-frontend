@@ -53,6 +53,7 @@ export default function Chat() {
                 autoPlay
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover"
+                style={{ transform: "scaleX(-1)" }}
             />
             </div>
 
