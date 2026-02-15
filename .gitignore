@@ -31,3 +31,18 @@ dist-ssr
 *.env.development.local
 *.env.test.local
 *.env.production.local
+
+# Misc
+*.pem
+*.p12
+*.crt
+*.key
+*.cer
+*.pfx
+*.jks
+*.p7b
+*.p7c
+*.p8
+*.csr
+*.der
+*.srl

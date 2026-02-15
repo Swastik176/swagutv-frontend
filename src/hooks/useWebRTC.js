@@ -1,7 +1,18 @@
 import { useRef, useState, useEffect } from "react";
 
+// const config = {
+//     iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+// };
+
 const config = {
-    iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+  iceServers: [
+    { urls: "stun:stun.l.google.com:19302" },
+    {
+      urls: "turn:65.0.130.192:3478",
+      username: "swagutv",
+      credential: "StrongPassword123"
+    }
+  ]
 };
 
 export function useWebRTC(socketRef, token) {
