@@ -26,7 +26,7 @@ export default function Signup() {
             );
 
             // ✅ navigate AFTER successful signup
-            navigate("/verify-otp", { state: { email } });
+            navigate("/verify-otp", { state: { email, reset: false } });
 
         } catch (err) {
             console.error(err.response?.data || err.message);

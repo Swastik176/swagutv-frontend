@@ -19,6 +19,7 @@ export function useAuth() {
         return token;
     };
 
+
     const logout = () => {
         localStorage.removeItem("jwt");
         navigate("/login");

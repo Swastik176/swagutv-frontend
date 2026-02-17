@@ -1,25 +1,41 @@
 import { useState } from "react";
-import { useAuth } from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
-
-export default function Login() {
-    const [email, setEmail] = useState("");
+export default function ResetPassword() {
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const { login } = useAuth();
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [validate, setValidate] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
+    const email = location.state?.email;
+
 
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
+
+        if(password !== confirmPassword) {
+            setValidate(false);
+            setLoading(false);
+            return;
+        }
+
         try {
-            await login(email, password);
-            navigate("/chat");
+            await axios.post(
+                `${import.meta.env.VITE_API_BASE_URL}/auth/reset-password`,
+                    { email, password }
+            );
+
+            // ✅ navigate AFTER successful signup
+            navigate("/login");
         } catch (error) {
-            alert("Invalid credentials");
+            console.log(error);
+            alert("Something went wrong!!");
         } finally {
             setLoading(false);
         }
@@ -30,23 +46,13 @@ export default function Login() {
             <div className="w-full max-w-md bg-[#020617] rounded-2xl p-8 text-white">
 
                 <h1 className="text-3xl font-bold mb-2">
-                Swa<span className="text-red-500">GU</span>Tv
+                    Swa<span className="text-red-500">GU</span>Tv
                 </h1>
                 <p className="text-gray-400 mb-6">
-                Login to continue chatting
+                    Enter new password
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <input
-                        type="email"
-                        placeholder="University email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        required
-                        className="w-full bg-black/40 border border-white/10
-                                px-4 py-3 rounded-xl focus:outline-none"
-                    />
-
                     <div className="relative">
                         <input
                             type={showPassword ? "text" : "password"}
@@ -67,21 +73,41 @@ export default function Login() {
                         </button>
                     </div>
 
+                    <div className="relative">
+                        <input
+                            type={showConfirmPassword ? "text" : "password"}
+                            placeholder="Confirm Password"
+                            value={confirmPassword}
+                            onChange={e => setConfirmPassword(e.target.value)}
+                            required
+                            className="w-full bg-black/40 border border-white/10
+                                    px-4 py-3 pr-12 rounded-xl focus:outline-none"
+                        />
 
-                    <p className="text-sm text-gray-400 ml-1">
-                        <a href="/forgot-password" className="text-indigo-400 hover:underline">
-                            forgot password?
-                        </a>
-                    </p>
+                        <button
+                            type="button"
+                            onClick={() => setShowConfirmPassword(prev => !prev)}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                        >
+                            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                    </div>
 
                     <button
                         disabled={loading}
                         className="w-full bg-indigo-500 hover:bg-indigo-600
                                 py-3 rounded-xl font-semibold transition"
                     >
-                        {loading ? "Logging in..." : "Login"}
+                        {loading ? "Resetting Password..." : "Reset Password"}
                     </button>
                 </form>
+
+                {!validate && (
+                    <p  
+                        className="text-sm text-red-500 mt-6 text-center">
+                        Password and confirm password must match!!
+                    </p>
+                )}
 
                 <p className="text-sm text-gray-400 mt-6 text-center">
                     New here?{" "}

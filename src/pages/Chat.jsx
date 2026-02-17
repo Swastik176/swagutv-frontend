@@ -28,9 +28,9 @@ export default function Chat() {
     // Fade in / out remote video based on call state
     useEffect(() => {
         if (inCall) {
-        setRemoteVisible(true);
+            setRemoteVisible(true);
         } else {
-        setRemoteVisible(false);
+            setRemoteVisible(false);
         }
     }, [inCall]);
 
@@ -48,25 +48,25 @@ export default function Chat() {
 
             {/* REMOTE VIDEO — TOP ON MOBILE, LEFT ON DESKTOP */}
             <div className="relative w-full md:w-1/2 flex-1 bg-black">
-            <video
-                ref={remoteVideoRef}
-                autoPlay
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ transform: "scaleX(-1)" }}
-            />
+                <video
+                    ref={remoteVideoRef}
+                    autoPlay
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{ transform: "scaleX(-1)" }}
+                />
             </div>
 
             {/* LOCAL VIDEO — BOTTOM ON MOBILE, RIGHT ON DESKTOP */}
             <div className="relative w-full md:w-1/2 flex-1 bg-black">
-            <video
-                ref={localVideoRef}
-                autoPlay
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ transform: "scaleX(-1)" }}
-            />
+                <video
+                    ref={localVideoRef}
+                    autoPlay
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{ transform: "scaleX(-1)" }}
+                />
 
             {/* STATUS (mobile-friendly) */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2

@@ -6,6 +6,7 @@ export default function VerifyOtp() {
     const location = useLocation();
     const navigate = useNavigate();
     const email = location.state?.email;
+    const resetFlow = location.state?.reset;
 
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
@@ -41,8 +42,8 @@ export default function VerifyOtp() {
                 }
             );
 
-            navigate("/login");
-        } catch {
+            resetFlow ? navigate("/reset-password", { state: { email } }) : navigate("/login");
+        } catch (error) {
             alert("Invalid OTP");
         } finally {
             setLoading(false);
@@ -98,15 +99,15 @@ export default function VerifyOtp() {
                         required
                         maxLength={6}
                         className="w-full bg-black/40 border border-white/10
-                                   px-4 py-3 rounded-xl focus:outline-none
-                                   text-center tracking-widest text-lg"
+                                    px-4 py-3 rounded-xl focus:outline-none
+                                    text-center tracking-widest text-lg"
                     />
 
                     <button
                         type="submit"
                         disabled={loading}
                         className="w-full bg-indigo-500 hover:bg-indigo-600
-                                   py-3 rounded-xl font-semibold transition"
+                                    py-3 rounded-xl font-semibold transition"
                     >
                         {loading ? "Verifying..." : "Verify OTP"}
                     </button>
