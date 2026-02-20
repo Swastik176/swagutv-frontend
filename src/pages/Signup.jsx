@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 
 export default function Signup() {
@@ -7,6 +8,8 @@ export default function Signup() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState("");
+    const [error, setError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const signup = async () => {
@@ -29,8 +32,7 @@ export default function Signup() {
             navigate("/verify-otp", { state: { email, reset: false } });
 
         } catch (err) {
-            console.error(err.response?.data || err.message);
-            alert("Signup failed");
+            setError(err.response?.data?.message || "Signup failed. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -61,7 +63,7 @@ export default function Signup() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         className="w-full bg-black/40 border border-white/10
-                                   px-4 py-3 rounded-xl focus:outline-none"
+                                    px-4 py-3 rounded-xl focus:outline-none"
                         required
                     />
 
@@ -75,15 +77,31 @@ export default function Signup() {
                                    px-4 py-3 rounded-xl focus:outline-none"
                     />
 
-                    <input
-                        type="password"
-                        placeholder="Create password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        required
-                        className="w-full bg-black/40 border border-white/10
-                                    px-4 py-3 rounded-xl focus:outline-none"
-                    />
+                    <div className="relative">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            required
+                            className="w-full bg-black/40 border border-white/10
+                                    px-4 py-3 pr-12 rounded-xl focus:outline-none"
+                        />
+
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(prev => !prev)}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                    </div>
+
+                    {error && (
+                        <p className="text-sm text-red-500 text-center">
+                            {error}
+                        </p>
+                    )}
 
                     <button
                         type="submit"

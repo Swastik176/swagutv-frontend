@@ -12,6 +12,7 @@ export default function VerifyOtp() {
     const [loading, setLoading] = useState(false);
     const [cooldown, setCooldown] = useState(60);
     const [resending, setResending] = useState(false);
+    const [error, setError] = useState("");
 
     // Redirect if no email
     useEffect(() => {
@@ -43,8 +44,8 @@ export default function VerifyOtp() {
             );
 
             resetFlow ? navigate("/reset-password", { state: { email } }) : navigate("/login");
-        } catch (error) {
-            alert("Invalid OTP");
+        } catch (err) {
+            setError(err.response?.data?.message || "Invalid OTP. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -102,6 +103,12 @@ export default function VerifyOtp() {
                                     px-4 py-3 rounded-xl focus:outline-none
                                     text-center tracking-widest text-lg"
                     />
+
+                    {error && (
+                        <p className="text-sm text-red-500 text-center">
+                            {error}
+                        </p>
+                    )}
 
                     <button
                         type="submit"

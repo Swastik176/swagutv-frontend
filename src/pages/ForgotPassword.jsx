@@ -6,6 +6,7 @@ import axios from "axios";
 export default function ForgotPassword() {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     async function handleSubmit(e) {
@@ -19,8 +20,7 @@ export default function ForgotPassword() {
             );
             navigate("/verify-otp", { state: { email, reset: true } });
         } catch (error) {
-            console.log(error);
-            alert("Invalid credentials");
+            setError(error.response?.data?.message || "Failed to send reset link. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -48,6 +48,12 @@ export default function ForgotPassword() {
                                 px-4 py-3 rounded-xl focus:outline-none"
                     />
                     
+
+                    {error && (
+                        <p className="text-sm text-red-500 text-center">
+                            {error}
+                        </p>
+                    )}
 
                     <button
                         disabled={loading}

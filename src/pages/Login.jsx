@@ -8,6 +8,7 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
@@ -18,8 +19,8 @@ export default function Login() {
         try {
             await login(email, password);
             navigate("/chat");
-        } catch (error) {
-            alert("Invalid credentials");
+        } catch (err) {
+            setError(err.response?.data?.message || "Login failed. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -67,6 +68,11 @@ export default function Login() {
                         </button>
                     </div>
 
+                    {error && (
+                        <p className="text-sm text-red-500 text-center">
+                            {error}
+                        </p>
+                    )}
 
                     <p className="text-sm text-gray-400 ml-1">
                         <a href="/forgot-password" className="text-indigo-400 hover:underline">

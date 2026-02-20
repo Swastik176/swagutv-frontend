@@ -10,6 +10,7 @@ export default function ResetPassword() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [validate, setValidate] = useState(true);
+    const [error, setError] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
     const email = location.state?.email;
@@ -34,8 +35,7 @@ export default function ResetPassword() {
             // ✅ navigate AFTER successful signup
             navigate("/login");
         } catch (error) {
-            console.log(error);
-            alert("Something went wrong!!");
+            setError(error.response?.data?.message || "Password reset failed. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -92,6 +92,12 @@ export default function ResetPassword() {
                             {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                     </div>
+                    
+                    {error && (
+                        <p className="text-sm text-red-500 text-center">
+                            {error}
+                        </p>
+                    )}
 
                     <button
                         disabled={loading}
