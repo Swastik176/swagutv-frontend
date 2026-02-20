@@ -1,16 +1,151 @@
-# React + Vite
+# 🎥 SwaGUTv
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> A private university-only random video chat platform built for real
+> students, real conversations, and real vibes.
 
-Currently, two official plugins are available:
+SwaGUTv is a secure, full-stack WebRTC-based platform that connects
+verified university students for spontaneous 1-on-1 video
+conversations.\
+It combines authentication, matchmaking, signaling, and TURN relay
+infrastructure to deliver reliable real-time communication across
+different networks.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+------------------------------------------------------------------------
 
-## React Compiler
+## 🚀 Live Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Frontend** - React (Vite) - Tailwind CSS - Hosted on Vercel
 
-## Expanding the ESLint configuration
+**Backend Services** - Auth Service (Spring Boot + JWT) - Signaling
+Service (Node.js + Socket.IO)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Database** - PostgreSQL
+
+**Infrastructure** - WebRTC (STUN + TURN) - Coturn (AWS EC2)
+
+------------------------------------------------------------------------
+
+# ✨ Core Features
+
+## 🔐 Secure University-Only Access
+
+-   Email domain restriction
+-   OTP verification
+-   JWT-based authentication
+-   Role-based access control
+
+## 🎥 Real-Time Video Chat
+
+-   Peer-to-peer WebRTC connection
+-   STUN for NAT traversal
+-   TURN relay fallback for strict networks
+-   Audio + Video streaming
+
+## 🔄 Smart Matchmaking
+
+-   Real-time queue system
+-   Random student pairing
+-   Instant "Next" switch
+-   Clean disconnection handling
+
+## ⏳ OTP System with Cooldown
+
+-   Email OTP verification
+-   Resend OTP with cooldown timer
+-   Spam folder guidance message
+-   Production-grade email provider support
+
+## 🎨 Modern UI (GenZ Focused)
+
+-   Startup-style dark theme
+-   Fully responsive layout
+-   Mobile stacked video layout
+-   Clean typography and branding
+
+------------------------------------------------------------------------
+
+# 🧠 Unique Selling Proposition (USP)
+
+### 🎓 University-Exclusive Community
+
+-   Restricted to verified university emails
+-   Safer and more meaningful conversations
+-   Reduced anonymity abuse
+
+### 🌍 Network-Resilient WebRTC Setup
+
+-   Automatic fallback from STUN to TURN
+-   Works across ISPs, NATs, and restricted campus WiFi
+
+### 🏗 Real Infrastructure Deployment
+
+-   Separate auth + signaling services
+-   Dedicated TURN relay
+-   Production database
+-   Cloud-hosted architecture
+
+------------------------------------------------------------------------
+
+# 🛠 Tech Stack
+
+### Frontend
+
+-   React
+-   Vite
+-   Tailwind CSS
+-   Axios
+-   React Router
+
+### Backend
+
+-   Spring Boot
+-   JWT Authentication
+-   Node.js
+-   Socket.IO
+
+### Realtime
+
+-   WebRTC
+-   STUN
+-   TURN (coturn)
+
+### Database
+
+-   PostgreSQL
+
+### Cloud
+
+-   AWS EC2
+-   Railway
+-   Vercel
+
+------------------------------------------------------------------------
+
+# 📈 Scaling Strategy
+
+### Phase 1 -- Campus Launch
+
+-   Single VPS (4GB RAM)
+-   Run Auth + Signaling + Postgres + TURN
+
+### Phase 2 -- Growth
+
+-   Separate TURN server
+-   Add Redis for signaling scaling
+-   Add Load Balancer
+
+------------------------------------------------------------------------
+
+# 👨‍💻 Author
+
+**Swastik Gupta**\
+Final-year B.Tech CSE\
+Backend-focused full-stack developer
+
+------------------------------------------------------------------------
+
+# ⭐ Why This Project Matters
+
+SwaGUTv demonstrates: - Real-time systems design - Distributed
+architecture - Cloud deployment - WebRTC infrastructure -
+Production-level authentication
